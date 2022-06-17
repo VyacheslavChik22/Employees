@@ -5,46 +5,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.employees.data.Employee;
-import pro.sky.employees.data.service.EmployeeService;
+import pro.sky.employees.data.EmployeeService;
 
-import java.util.List;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final EmployeeService service;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
     }
 
     @GetMapping("/add")
-    public Employee add(@RequestParam("firstName") String name,
-                        @RequestParam("lastName") String lastName) {
-        return employeeService.add(name, lastName);
-
+    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int department, @RequestParam double salary) {
+        return service.add(firstName, lastName, department, salary);
     }
-
 
     @GetMapping("/remove")
-    public Employee remove(@RequestParam("firstName") String name,
-                        @RequestParam("lastName") String lastName) {
-        return employeeService.remove(name, lastName);
-
+    public Employee removeEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int department, @RequestParam double salary) {
+        return service.remove(firstName, lastName, department, salary);
     }
-
 
     @GetMapping("/find")
-    public Employee find(@RequestParam("firstName") String name,
-                        @RequestParam("lastName") String lastName) {
-        return employeeService.find(name, lastName);
-
+    public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int department, @RequestParam double salary) {
+        return service.find(firstName, lastName, department, salary);
     }
 
-    @GetMapping("/allPersons")
-    public List<Employee> allPersons() {
-        return employeeService.allPersons();
+    @GetMapping
+    public Collection<Employee> findAll() {
+        return service.findAll();
+    }
 
+
+
+    @GetMapping("/departments/max-salary?departmentId")
+     public Collection<Employee> findEmployeeWithMaxSalary() {
+        return service.findEmployeeWithMaxSalary();
+    }
+
+    @GetMapping("/departments/min-salary?departmentId")
+    public Collection<Employee> findEmployeeWithMinSalary() {
+        return service.findEmployeeWithMinSalary();
+    }
+
+    @GetMapping("/departments/all?departmentId")
+    public Collection<Employee> findEmployeeDepartment() {
+        return service.findEmployeeDepartment();
+    }
+
+    @GetMapping(" /departments/all")
+    public Collection<Employee> findAllEmployeeByDepartment() {
+        return service.findAllEmployeeByDepartment();
     }
 }
-//
