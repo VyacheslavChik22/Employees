@@ -33,26 +33,23 @@ public class EmployeeController {
         return service.find(firstName, lastName, department, salary);
     }
 
-    @GetMapping
-    public Collection<Employee> findAll() {
-        return service.findAll();
+
+
+
+
+    @GetMapping("/departments/max-salary")
+     public Collection<Employee> findEmployeeWithMaxSalary(@RequestParam Integer departmentId) {
+        return service.findEmployeeWithMaxSalary(departmentId);
     }
 
-
-
-    @GetMapping("/departments/max-salary?departmentId")
-     public Collection<Employee> findEmployeeWithMaxSalary() {
-        return service.findEmployeeWithMaxSalary();
+    @GetMapping("/departments/min-salary")
+    public Collection<Employee> findEmployeeWithMinSalary(@RequestParam Integer departmentId) {
+        return service.findEmployeeWithMinSalary(departmentId);
     }
 
-    @GetMapping("/departments/min-salary?departmentId")
-    public Collection<Employee> findEmployeeWithMinSalary() {
-        return service.findEmployeeWithMinSalary();
-    }
-
-    @GetMapping("/departments/all?departmentId")
-    public Collection<Employee> findEmployeeDepartment() {
-        return service.findEmployeeDepartment();
+    @GetMapping("/departments/all-department")
+    public Collection<Employee> findEmployeeDepartment(@RequestParam Integer departmentId) {
+        return service.findEmployeeDepartment(departmentId);
     }
 
     @GetMapping(" /departments/all")

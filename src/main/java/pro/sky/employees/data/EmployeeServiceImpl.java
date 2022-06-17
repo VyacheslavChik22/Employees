@@ -48,28 +48,37 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
-    @Override
-    public Collection<Employee> findAll() {
-        return Collections.unmodifiableList(employeeList);
-    }
+
+
+
+
 
     @Override
-    public Collection<Employee> findEmployeeWithMaxSalary() {
+    public Collection<Employee> findEmployeeWithMaxSalary(Integer departmentId) {
+        double max = 0;
+        employeeList.stream().forEach(employee -> {
+            if(max < employee.getSalary()){
+                max =
+            }
+
+        });
+
         return null;
     }
 
     @Override
-    public Collection<Employee> findEmployeeWithMinSalary() {
+    public Collection<Employee> findEmployeeWithMinSalary(Integer departmentId) {
         return null;
     }
 
     @Override
-    public Collection<Employee> findEmployeeDepartment() {
+    public Collection<Employee> findEmployeeDepartment(Integer departmentId) {
         return null;
     }
 
     @Override
     public Collection<Employee> findAllEmployeeByDepartment() {
-        return null;
+        return Collections.unmodifiableList(employeeList);
+
     }
 }
