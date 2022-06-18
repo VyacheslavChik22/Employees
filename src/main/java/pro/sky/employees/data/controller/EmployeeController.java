@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.employees.data.Employee;
-import pro.sky.employees.data.EmployeeService;
+import pro.sky.employees.data.service.EmployeeService;
 
 import java.util.Collection;
 
@@ -41,7 +41,7 @@ public class EmployeeController {
 
 
     @GetMapping("/departments/max-salary")
-     public Employee findEmployeeWithMaxSalary(@RequestParam Integer departmentId) {
+    public Employee findEmployeeWithMaxSalary(@RequestParam Integer departmentId) {
         return service.findEmployeeWithMaxSalary(departmentId);
     }
 
@@ -50,13 +50,15 @@ public class EmployeeController {
         return service.findEmployeeWithMinSalary(departmentId);
     }
 
+
+
+
     @GetMapping("/departments/all-department")
-    public Employee findEmployeeDepartment(@RequestParam Integer departmentId) {
-        return service.findEmployeeDepartment(departmentId);
+    public Collection<Employee> findEmployeesFromDepartment(@RequestParam Integer departmentId) {
+        return service.findEmployeesFromDepartment(departmentId);
     }
 
-    @GetMapping(" /departments/all")
-    public Collection<Employee> findAllEmployeeByDepartments() {
-        return service.findAllEmployeeByDepartments();
+    @GetMapping("/departments/all")
+    public Collection<Employee> findAllEmployeeByDepartments(@RequestParam Integer departmentId) {return service.findAllEmployeeByDepartments(departmentId);
     }
 }
