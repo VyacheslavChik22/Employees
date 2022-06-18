@@ -10,11 +10,13 @@ public interface EmployeeService {
     Employee find(String firstName, String lastName,int department,double salary);
 
 
-    Collection<Employee> findEmployeeWithMaxSalary(Integer departmentId);
+    Employee findEmployeeWithMaxSalary(Integer departmentId);
 
-    Collection<Employee> findEmployeeWithMinSalary(Integer departmentId);
+    Employee findEmployeeWithMinSalary(Integer departmentId);
 
-    Collection<Employee> findEmployeeDepartment(Integer departmentId);
+    Employee findEmployeeDepartment(Integer departmentId);
 
-    Collection<Employee> findAllEmployeeByDepartment();
+    Collection<Employee> findAllEmployeeByDepartments();
+
+    Collection<Employee> findAll();
 }

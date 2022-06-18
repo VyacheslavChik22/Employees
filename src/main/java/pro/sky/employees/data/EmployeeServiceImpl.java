@@ -4,10 +4,8 @@ import org.springframework.stereotype.Service;
 import pro.sky.employees.data.exeption.EmployeeAlreadyAddedException;
 import pro.sky.employees.data.exeption.EmployeeNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -54,30 +52,42 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Collection<Employee> findEmployeeWithMaxSalary(Integer departmentId) {
-        double max = 0;
-        employeeList.stream().forEach(employee -> {
-            if(max < employee.getSalary()){
-                max =
-            }
-
-        });
-
-        return null;
+    public Employee findEmployeeWithMaxSalary(Integer departmentId) {
+        return employeeList.stream()
+                .filter(employee -> employee.getDepartment() == departmentId)
+                .max(Comparator.comparing(Employee::getSalary))
+                .orElseThrow(()-> new RuntimeException("Not found department"));
     }
 
     @Override
-    public Collection<Employee> findEmployeeWithMinSalary(Integer departmentId) {
-        return null;
+    public Employee findEmployeeWithMinSalary(Integer departmentId) {
+        return employeeList.stream()
+                .filter(employee -> employee.getDepartment() == departmentId)
+                .min(Comparator.comparing(Employee::getSalary))
+                .orElseThrow(()-> new RuntimeException("Not found department"));
+
     }
 
     @Override
-    public Collection<Employee> findEmployeeDepartment(Integer departmentId) {
-        return null;
+    public Employee findEmployeeDepartment(Integer departmentId) {
+
+
+
+
+
+
+
     }
 
     @Override
-    public Collection<Employee> findAllEmployeeByDepartment() {
+    public Collection<Employee> findAllEmployeeByDepartments() {
+
+        return null;
+
+    }
+
+    @Override
+    public Collection<Employee> findAll() {
         return Collections.unmodifiableList(employeeList);
 
     }
